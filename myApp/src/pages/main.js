@@ -165,68 +165,7 @@ export default class main extends Component {
             }             
           </ScrollView>
         </Content>
-      </Container>
-
-
-      // <View>
-          
-      //   <Text > Main </Text>        
-
-      //   <Text style={styles.title}> Nome: </Text>
-      //   <TextInput
-      //     value={this.state.a} 
-      //     onChangeText={a => this.setState({a})} 
-      //   />
-
-      //   <Text> Telefone: </Text>
-      //   <TextInput 
-      //     keyboardType="numeric"
-      //     value={this.state.b}
-      //     onChangeText={b => this.setState({b})} 
-      //   />       
-
-      //   <Text> Email: </Text>
-      //   <TextInput
-      //     keyboardType="email-address"
-      //     value={this.state.c}
-      //     onChangeText={c => this.setState({c})}
-      //   />
-
-      //   <Button block success onPress={() => this.addPessoa()}>
-      //     <Text>Gravar</Text>
-      //   </Button>
-
-      //   {/* <Button block primary onPress={() => Actions.son({data : this.state})}>
-      //       <Text>Go to son page</Text>            
-      //   </Button> */}
-   
-      //   <ScrollView>
-      //     { 
-      //       this.state.pessoas.map(pessoa => {              
-      //         return(                
-      //           <View 
-      //             style={{flexDirection:'row', justifyContent:'space-between'}}>
-
-      //             <View style={{flexDirection:'column'}}>
-      //               <Text> Nome: {pessoa.name}</Text>
-      //               <Text> Telefone: {pessoa.phone}</Text>
-      //               <Text> Email: {pessoa.email}</Text>
-      //             </View> 
-      //             <Button 
-      //               onPress={ () => this.delPessoa(pessoa)}>
-      //               <Text>   Excluir   </Text>
-      //             </Button>                 
-      //             <Button 
-      //               onPress={ () => this.loadData(pessoa)}>
-      //               <Text>   Editar   </Text>
-      //             </Button>
-      //           </View>
-      //         )
-      //     }) 
-      //     } 
-      //   </ScrollView>
-
-      // </View>      
+      </Container>    
     );
   }
 }
