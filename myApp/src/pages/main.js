@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {  View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
-import { Button } from 'native-base';
+import { Button, Container, Header, Content, Form, Item, 
+         Input, Label, Left, Body, Right, Title, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
 export default class main extends Component {    
@@ -18,6 +19,7 @@ export default class main extends Component {
     {
       alert('Preencha todos os campos para prosseguir');
     }else if(this.state.id == 0){
+      //Adding pessoa
       const p = {
         id: this.state.count,  
         name: this.state.a,
@@ -25,8 +27,10 @@ export default class main extends Component {
         email: this.state.c
       }
       this.state.pessoas.push(p);
+      alert(p.name+' foi adicionado a lista com sucesso!'); 
       this.state.count = this.state.count + 1;      
     }else{
+      //Editing pessoa
       var listaPessoas = [];
       listaPessoas = this.state.pessoas;
   
@@ -37,8 +41,10 @@ export default class main extends Component {
           p.name = this.state.a;
           p.phone = this.state.b;
           p.email = this.state.c;   
-          this.state.pessoas.push(p);       
-        }      
+          this.state.pessoas.push(p);  
+          alert(p.name+' foi editado com sucesso!');     
+        }   
+          
       });      
     }
 
@@ -84,65 +90,143 @@ export default class main extends Component {
 
   render() {    
     return (
-      <View>
+
+      <Container>
+        <Header>
+        <Left/>
+          <Body>
+            <Title>My First App</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content>
+          <Form>
+            <Item floatingLabel>
+              <Label>Nome</Label>
+              <Input 
+                value={this.state.a} 
+                onChangeText={a => this.setState({a})}
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Telefone</Label>
+              <Input 
+                keyboardType="numeric"
+                value={this.state.b}
+                onChangeText={b => this.setState({b})}
+              />
+            </Item>
+            <Item floatingLabel>
+              <Label>Email</Label>
+              <Input 
+                keyboardType="email-address"
+                value={this.state.c}
+                onChangeText={c => this.setState({c})}
+              />
+            </Item>
+          </Form>
+          <Button block success onPress={() => this.addPessoa()}>
+            <Text>Gravar</Text>
+          </Button>
+
+          <ScrollView>            
+            { 
+              this.state.pessoas.map(pessoa => {              
+                return( 
+                  <Card>
+                    <CardItem>  
+                      <View style={{flexDirection:'row', justifyContent:'space-between'}} 
+                        >
+                        <Left>
+                          <View style={{flexDirection:'column'}}>
+                            <Text> Nome: {pessoa.name}</Text>
+                            <Text> Telefone: {pessoa.phone}</Text>
+                            <Text> Email: {pessoa.email}</Text>
+                          </View>
+                        </Left>
+                        <Right>
+                          <View style={{flexDirection:'row', justifyContent:'space-between'}}>
+                            <Button danger
+                              onPress={ () => this.delPessoa(pessoa)}>
+                              <Text>   Excluir   </Text>
+                            </Button>  
+                                            
+                            <Button warning
+                              onPress={ () => this.loadData(pessoa)}>
+                              <Text>   Editar   </Text>
+                            </Button>
+                          </View> 
+                        </Right>                       
+                      </View>
+                    </CardItem>
+                  </Card>
+                )
+              }) 
+            }             
+          </ScrollView>
+        </Content>
+      </Container>
+
+
+      // <View>
           
-        <Text > Main </Text>        
+      //   <Text > Main </Text>        
 
-        <Text style={styles.title}> Nome: </Text>
-        <TextInput
-          value={this.state.a} 
-          onChangeText={a => this.setState({a})}
-        />
+      //   <Text style={styles.title}> Nome: </Text>
+      //   <TextInput
+      //     value={this.state.a} 
+      //     onChangeText={a => this.setState({a})} 
+      //   />
 
-        <Text> Telefone: </Text>
-        <TextInput 
-          keyboardType="numeric"
-          value={this.state.b}
-          onChangeText={b => this.setState({b})} 
-        />       
+      //   <Text> Telefone: </Text>
+      //   <TextInput 
+      //     keyboardType="numeric"
+      //     value={this.state.b}
+      //     onChangeText={b => this.setState({b})} 
+      //   />       
 
-        <Text> Email: </Text>
-        <TextInput
-          keyboardType="email-address"
-          value={this.state.c}
-          onChangeText={c => this.setState({c})}
-        />
+      //   <Text> Email: </Text>
+      //   <TextInput
+      //     keyboardType="email-address"
+      //     value={this.state.c}
+      //     onChangeText={c => this.setState({c})}
+      //   />
 
-        <Button block alert onPress={() => this.addPessoa()}>
-          <Text>Gravar</Text>
-        </Button>
+      //   <Button block success onPress={() => this.addPessoa()}>
+      //     <Text>Gravar</Text>
+      //   </Button>
 
-        {/* <Button block primary onPress={() => Actions.son({data : this.state})}>
-            <Text>Go to son page</Text>            
-        </Button> */}
+      //   {/* <Button block primary onPress={() => Actions.son({data : this.state})}>
+      //       <Text>Go to son page</Text>            
+      //   </Button> */}
    
-        <ScrollView>
-          { 
-            this.state.pessoas.map(pessoa => {              
-              return(                
-                <View 
-                  style={{flexDirection:'row', justifyContent:'space-between'}}>
+      //   <ScrollView>
+      //     { 
+      //       this.state.pessoas.map(pessoa => {              
+      //         return(                
+      //           <View 
+      //             style={{flexDirection:'row', justifyContent:'space-between'}}>
 
-                  <View style={{flexDirection:'column'}}>
-                    <Text> Nome: {pessoa.name}</Text>
-                    <Text> Telefone: {pessoa.phone}</Text>
-                    <Text> Email: {pessoa.email}</Text>
-                  </View> 
-                  <Button 
-                    onPress={ () => this.delPessoa(pessoa)}>
-                    <Text>   Excluir   </Text>
-                  </Button>                 
-                  <Button 
-                    onPress={ () => this.loadData(pessoa)}>
-                    <Text>   Editar   </Text>
-                  </Button>
-                </View>
-              )
-          }) 
-          } 
-        </ScrollView>
+      //             <View style={{flexDirection:'column'}}>
+      //               <Text> Nome: {pessoa.name}</Text>
+      //               <Text> Telefone: {pessoa.phone}</Text>
+      //               <Text> Email: {pessoa.email}</Text>
+      //             </View> 
+      //             <Button 
+      //               onPress={ () => this.delPessoa(pessoa)}>
+      //               <Text>   Excluir   </Text>
+      //             </Button>                 
+      //             <Button 
+      //               onPress={ () => this.loadData(pessoa)}>
+      //               <Text>   Editar   </Text>
+      //             </Button>
+      //           </View>
+      //         )
+      //     }) 
+      //     } 
+      //   </ScrollView>
 
-      </View>      
+      // </View>      
     );
   }
 }
