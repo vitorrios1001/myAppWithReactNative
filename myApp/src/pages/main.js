@@ -125,6 +125,7 @@ export default class main extends Component {
               />
             </Item>
           </Form>
+         
           <Button block success onPress={() => this.addPessoa()}>
             <Text>Gravar</Text>
           </Button>
@@ -133,10 +134,9 @@ export default class main extends Component {
             { 
               this.state.pessoas.map(pessoa => {              
                 return( 
-                  <Card>
+                  <Card key={pessoa.id} >
                     <CardItem>  
-                      <View style={{flexDirection:'row', justifyContent:'space-between'}} 
-                        >
+                      <View  style={{flexDirection:'row', justifyContent:'space-between'}}>
                         <Left>
                           <View style={{flexDirection:'column'}}>
                             <Text> Nome: {pessoa.name}</Text>
@@ -170,9 +170,5 @@ export default class main extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  title:{
-    color: 'blue'
-  }
-})
+
 
