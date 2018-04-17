@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View, Text, TextInput, StyleSheet, ScrollView } from 'react-native';
+import {  View, Text, TextInput, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Container, Header, Content, Form, Item, 
          Input, Label, Left, Body, Right, Title, Card, CardItem} from 'native-base';
 import { Actions } from 'react-native-router-flux';
@@ -83,6 +83,7 @@ export default class main extends Component {
     listaPessoas.forEach(p =>{
       if(p.id == pessoa.id){
         this.state.pessoas.pop(p)
+        this.clearFields();
         this.setState(this.state);
       }      
     }); 
@@ -146,15 +147,18 @@ export default class main extends Component {
                         </Left>
                         <Right>
                           <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                            <Button danger
-                              onPress={ () => this.delPessoa(pessoa)}>
-                              <Text>   Excluir   </Text>
-                            </Button>  
-                                            
-                            <Button warning
-                              onPress={ () => this.loadData(pessoa)}>
-                              <Text>   Editar   </Text>
-                            </Button>
+                            <TouchableOpacity >
+                              <Button danger onPress={ () => this.delPessoa(pessoa)}>
+                                <Text>   Excluir   </Text>
+                              </Button>
+                            </TouchableOpacity>
+                              
+                            <TouchableOpacity >
+                              <Button warning onPress={ () => this.loadData(pessoa)}>
+                                <Text>   Editar   </Text>
+                              </Button>
+                            </TouchableOpacity>                
+                            
                           </View> 
                         </Right>                       
                       </View>
@@ -169,6 +173,8 @@ export default class main extends Component {
     );
   }
 }
+
+
 
 
 
